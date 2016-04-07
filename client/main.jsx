@@ -22,12 +22,31 @@ class DemoSlide extends Component {
   handleClick () {
     console.log('this', this, 'can I console component', Component)
   }
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll)
+    let bottom = this.state.bottom
+    this.setState({bottom: bottom + 3})
+  }
+  handleScroll(e) {
+    let scrollTop = scrollTop || e.srcElement.body.scrollTop;
+    let availHeight = window.screen.availHeight
+    if (availHeight - scrollTop < 150) {
+      let currentSources = this.state.current
+      let currentLastSource = this.state.bottom
+      currentSources = currentSources.concat(this.srcArray.slice(currentLastSource, currentLastSource + 3))
+      scrollTop = 0
+      this.setState({current: currentSources, bottom: this.state.bottom + 3})
+    }
+  }
   render () {
     return (
-      <div onClick = {this.handleClick}>hey</div>
+      <div onClick = {this.handleClick}>
+        hey
+        <Gallery source={this.state.current} scroll={this.handleScroll} />
+      </div>
     )
   }
 }
  // This is a very recent change introduced with 0.14. They split up React into
  // a core library and the DOM adapter. Rendering is now done via ReactDOM.render
-ReactDOM.render(<App/>, document.getElementById('content'))
+ReactDOM.render(<DemoSlide />, document.getElementById('content'))
