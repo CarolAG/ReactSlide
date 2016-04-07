@@ -78,7 +78,7 @@
 
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
 	    // With this change, we introduce the constructor, where we need to call
-	    // super() to pass the props to React.Component.
+	    // super() to pass the props to React.Component and use the 'this' keyword
 
 
 	    _this.state = {};
@@ -105,7 +105,7 @@
 	  return App;
 	}(_react.Component);
 	// This is a very recent change introduced with 0.14. They split up React into
-	// a core library and the DOM adapter. Rendering is now done via ReactDOM.render.
+	// a core library and the DOM adapter. Rendering is now done via ReactDOM.render
 
 
 	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('content'));

@@ -2,10 +2,35 @@
 <html>
   <head>
     <title>ReactSlide</title>
+    <link rel='stylesheet' href='styles.css' type='text/css'>
   </head>
-  <body>
+  <body class='gradient'>
     <div id="content"></div>
+    <div class="navbar">
+      <div id="title">WebFlight-React</div>
+    </div>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js"></script>
+    <script>
+     var client = new WebTorrent();
+     wfGlobal = {}
+     var magnetURI = 'magnet:?xt=urn:btih:18fffb4e0e37c149ec1d6efe30b975a99edb74db&dn=blue-1.jpg&tr=udp%3A%2F%2Fexodus.desync.com%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.webtorrent.io'
+     client.add(magnetURI, function(torrent) {
+
+       // show torrent download progress
+       torrent.on('download', function(chunkSize) {
+          console.log('progress: ' + torrent.progress);
+        })
+
+       // add BlobURLs to wfGlobal object
+       torrent.files.forEach(function(file) {
+           file.getBlobURL(function(err, url) {
+              wfGlobal[file.name] = url
+           })
+       })
+     })
+    </script>
   </body>
   <script src="../build/bundle.js"></script>
-  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- <script src="./node_modules/jquery/dist/jquery.min.js"></script> -->
 </html>
