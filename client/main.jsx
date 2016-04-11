@@ -47,6 +47,7 @@ class DemoSlide extends Component {
     )
   }
 }
+//changing a line to make a commit
  // This is a very recent change introduced with 0.14. They split up React into
  // a core library and the DOM adapter. Rendering is now done via ReactDOM.render
 ReactDOM.render(<DemoSlide />, document.getElementById('content'))
